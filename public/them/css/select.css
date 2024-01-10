@@ -1,0 +1,5 @@
+#selectedLink {
+    background-color: #00ff00; /* Màu xanh lá cây */
+    padding: 5px; /* Độ dày của vùng màu nền */
+    display: inline-block; /* Để màu nền chỉ bao quanh chữ, không chiếm cả dòng */
+}
