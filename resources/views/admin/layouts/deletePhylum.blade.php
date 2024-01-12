@@ -30,7 +30,7 @@
 
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-        axios.delete('/destroy-phylum/' + phylumId, {
+        axios.delete('/admin/destroy-phylum/' + phylumId, {
             headers: {
                 'X-CSRF-TOKEN': csrfToken
             }
@@ -46,6 +46,7 @@
             }
 
             $('#deletePhylumModal').modal('hide');
+            location.reload();
         })
         .catch(function (error) {
             console.error('Error deleting phylum:', error);

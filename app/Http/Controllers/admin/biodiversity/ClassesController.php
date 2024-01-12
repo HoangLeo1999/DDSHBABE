@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\biodiversity;
 use Illuminate\Database\QueryException;
 use App\Http\Controllers\Controller;
 use App\Models\Phylum;
@@ -63,29 +63,38 @@ class ClassesController extends Controller
     public function saveClass(Request $request,$id)
     {
    
-        try {
-            // Nội dung phương thức update
-            $class = Classes::findOrFail($id);
-            
-            // Cập nhật thông tin tài khoản từ dữ liệu form
-            $class->lop_vn = $request->input('lop_vn');
-            $class->lop_latin = $request->input('lop_latin');
-            $class->phylum_id = $request->input('phylum_id');
-            $class->description = $request->input('description');
-            $class->slug = $request->input('slug');
-            $class->status = $request->input('status');
-            
-            $class->save();
-    
-            return response()->json(['success' => true]);
-        } catch (QueryException $e) {
-            \Log::error('Error updating data: ' . $e->getMessage());
-            return response()->json(['message' => 'Internal Server Error'], 500);
-        } catch (\Exception $e) {
-            \Log::error('Error updating data: ' . $e->getMessage());
-            return response()->json(['message' => 'Internal Server Error'], 500);
-        }
+        
+    try {
+        // Nội dung phương thức update
+        $class = Classes::findOrFail($id);
+        
+        // Cập nhật thông tin tài khoản từ dữ liệu form
+        $class->lop_vn = $request->input('lop_vn');
+        $class->lop_latin = $request->input('lop_latin');
+        $class->phylum_id = $request->input('phylum_id');
+        $class->description = $request->input('description');
+        $class->slug = $request->input('slug');
+        $class->status = $request->input('status');
+        
+        $class->save();
+
+        // Lấy lại dữ liệu sau khi lưu để trả về cho view
+        $updatedClass = Classes::findOrFail($id);
+        $phylums = Phylum::all();
+
+        return response()->json([
+            'success' => true,
+            'updatedClass' => $updatedClass,
+            'phylums' => $phylums
+        ]);
+    } catch (QueryException $e) {
+        \Log::error('Error updating data: ' . $e->getMessage());
+        return response()->json(['message' => 'Internal Server Error'], 500);
+    } catch (\Exception $e) {
+        \Log::error('Error updating data: ' . $e->getMessage());
+        return response()->json(['message' => 'Internal Server Error'], 500);
     }
+}
     public function destroyClass($id)
     {
         try {

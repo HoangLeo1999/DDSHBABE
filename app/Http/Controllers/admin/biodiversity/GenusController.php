@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\biodiversity;
 use App\Models\Classes;
 use App\Models\Family;
 use App\Models\Order;
@@ -35,23 +35,33 @@ class GenusController extends Controller
         ]);
 
         // Create a new user
-    $families = Family::create($validatedData);
+    $genus = Genus::create($validatedData);
 
     // Attach roles to the user
         // Return a success response
-        return response()->json(['message' => 'Thêm thành công', 'family' => $families], 200);
+        return response()->json(['message' => 'Thêm thành công', 'genus' => $genus], 200);
     }
     // Các phương thức khác
 
     public function getGenusById($id)
     {
-        $families = Family::findOrFail($id);
-        $phylums = Phylum::all();
-        $classes = Classes::all();
-        $orders = Order::all();
-
-        return response()->json([$orders=>$orders,$classes=>$classes
-        ,$phylums=>$phylums,$families=>$families]);
+          try {
+            $genus = Genus::findOrFail($id);
+            $families = Family::all();
+            $orders = Order::all();
+            $classes = Classes::all();
+            $phylums = Phylum::all();
+    
+            return response()->json([
+                'genus'=>$genus,
+                'families'=>$families,
+                'orders' => $orders,
+                'classes' => $classes,
+                'phylums' => $phylums
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Class not found.'], 404);
+        }
     }
 
     public function saveGenus(Request $request)
@@ -64,7 +74,7 @@ class GenusController extends Controller
        
             // Nếu là chức năng chỉnh sửa, cập nhật thông tin tài khoản
             if ($genusID) {
-                $genus = Family::findOrFail($genusID);
+                $genus = Genus::findOrFail($genusID);
             } 
         // Cập nhật thông tin tài khoản từ dữ liệu form
         $genus->chi_vn = $request->input('ho_vn');
@@ -85,12 +95,12 @@ class GenusController extends Controller
     public function destroyGenus($id)
     {
         try {
-            $genus = Family::findOrFail($id);
+            $genus = Genus::findOrFail($id);
             $genus->delete();
     
-            return response()->json(['success' => true, 'message' => 'Xóa họ thành công']);
+            return response()->json(['success' => true, 'message' => 'Xóa chi thành công']);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Xóa họ thất bại. Lỗi: ' . $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => 'Xóa chi thất bại. Lỗi: ' . $e->getMessage()]);
         }
     }
 }

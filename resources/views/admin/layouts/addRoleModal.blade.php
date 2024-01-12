@@ -1,7 +1,5 @@
 <!-- Button to trigger modal -->
-<button class="btn btn-success" data-toggle="modal" data-target="#addRoleModal">
-    Thêm vai trò mới
-  </button>
+
   <!-- The Modal -->
   <div class="modal fade" id="addRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
@@ -29,8 +27,7 @@
                    
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" onclick="submitRoleData()">Thêm</button>
+                <button type="submit" class="btn btn-primary">Add Role </button>
             </div>
         </div>
     </div>
@@ -49,36 +46,36 @@
           // Show modal when button is clicked
           $('#addRoleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);});
-      // Add a function to submit form data
-      function submitRoleData() {
-          // Your form submission logic goes here
-          // For example, you can use AJAX to submit the form asynchronously
+  $(document).ready(function () {
+    $('#addRoleForm').submit(function (e) {
+        e.preventDefault();
+
+        // Serialize form data
+        var formData = $(this).serialize();
           $.ajax({
-              type: 'POST',
-              url: '{{ route("admin.addRole") }}', // Change this to your route
-              data: $('#addRoleForm').serialize(),
-              success: function(response) {
-                  // Handle success response
-                  console.log(response);
-                  $('#addRoleModal').modal('toggle');
-                  // You may want to reload the page or update the user list here
-                  $.ajax({
-  type: 'GET',
-  url: '{{ route("admin.role") }}', // Thay đổi thành đường dẫn của bạn
-  success: function(data) {
-      // Update the user list
-      $('#roles').html(data);
-  },
-  error: function(error) {
-      console.log(error);
-  }
+            url: '/admin/add-role',
+            type: 'post',
+            data: formData,
+            success: function (response) {
+                // Handle success
+                console.log(response);
+                // You can update the UI or close the modal here
+                $('#addRoleModal').modal('toggle');
+                location.reload(); 
+            },
+            error: function (xhr) {
+                // Handle errors
+                console.log(xhr.responseText);
+            }
+        })
+       
 });
-              },
-              error: function(error) {
-                  // Handle error response
-                  console.log(error);
-              }
+            //   },
+            //   error: function(error) {
+            //       // Handle error response
+            //       console.log(error);
+            //   }
           });
-      }
+      
   </script>
   

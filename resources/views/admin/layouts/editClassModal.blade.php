@@ -27,8 +27,12 @@
                         <label for="editNganh">Ngành:</label>
                         <select class="form-control" id="editNganh" name="phylum_id">
                             @foreach($phylums as $phylum)
-                                <option value="{{ $phylum->id }}">{{ $phylum->nganh_vn }}</option>
-                            @endforeach
+            @foreach($classes as $class)
+                <option value="{{ $phylum->id }}" {{ $phylum->id == $class->phylum_id ? 'selected' : '' }}>
+                    {{ $phylum->_vn }}
+                </option>
+            @endforeach
+        @endforeach
                         </select>
                     </div>
                     <div class="form-group">

@@ -7,18 +7,17 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class CountConservationvalueExport implements FromCollection
 {
-    protected $plants;
-    protected $animals;
+    protected $conservationvls;
+   
 
-    public function __construct(array $plants, array $animals)
+    public function __construct(array $conservationvls)
     {
-        $this->plants = $plants;
-        $this->animals = $animals;
+        $this->conservationvls = $conservationvls;
     }
 
     public function collection()
     {
-        return collect(array_merge($this->plants, $this->animals));
+        return collect(array_merge( $this->conservationvls));
     }
 
     public function headings(): array

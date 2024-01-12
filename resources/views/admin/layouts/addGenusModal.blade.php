@@ -1,25 +1,33 @@
-<div class="modal fade" id="addFamilyModal" tabindex="-1" role="dialog" aria-labelledby="addFamilyModalLabel" aria-hidden="true">
+<div class="modal fade" id="addGenusModal" tabindex="-1" role="dialog" aria-labelledby="addGenusModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addFamilyModalLabel">Add New Family</h5>
+                <h5 class="modal-title" id="addGenusModalLabel">Add New Genus</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <!-- Form to add a new Phylum -->
-                <form id="addFamilyForm">
+                <form id="addGenusForm">
                     @csrf
 
                     <div class="form-group">
-                        <label for="ho_vn">Họ VN:</label>
-                        <input type="text" name="ho_vn" class="form-control" required>
+                        <label for="chi_vn">Chi VN:</label>
+                        <input type="text" name="chi_vn" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="ho_latin">Họ Latin:</label>
-                        <input type="text" name="ho_latin" class="form-control" required>
+                        <label for="chi_latin">Chi Latin:</label>
+                        <input type="text" name="chi_latin" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="family_id">Họ</label>
+                        <select class="form-control" id="family_id" name="family_id">
+                            @foreach($families as $family)
+                                <option value="{{ $family->id }}">{{ $family->ho_vn }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="order_id">Bộ</label>
@@ -60,7 +68,7 @@
 
                     <!-- Add other form fields as needed -->
 
-                    <button type="submit" class="btn btn-primary">Add Family </button>
+                    <button type="submit" class="btn btn-primary">Add Genus </button>
                 </form>
             </div>
         </div>
@@ -73,10 +81,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 // Handle form submission using Ajax
-$('#addFamilyModal').on('show.bs.modal', function (event) {
+$('#addGenusModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);});
 $(document).ready(function () {
-    $('#addFamilyForm').submit(function (e) {
+    $('#addGenusForm').submit(function (e) {
         e.preventDefault();
 
         // Serialize form data
@@ -84,14 +92,14 @@ $(document).ready(function () {
 
         // Submit form data using Ajax
         $.ajax({
-            url: '/admin/add-family',
+            url: '/admin/add-genus',
             type: 'post',
             data: formData,
             success: function (response) {
                 // Handle success
                 console.log(response);
                 // You can update the UI or close the modal here
-                $('#addFamilyModal').modal('toggle');
+                $('#addGenusModal').modal('toggle');
                 location.reload(); 
             },
             error: function (xhr) {

@@ -8,7 +8,7 @@
 <div id="layoutSidenav_content">
         <main>
           @include('admin.layouts.header')
-          <button class="btn btn-success" data-toggle="modal" data-target="#addOrderModal">
+          <button class="btn btn-success" data-toggle="modal" data-target="#addFamilyModal">
             Thêm họ
         </button>
         @include('admin.layouts.addFamilyModal')
@@ -29,8 +29,8 @@
             <th>Lớp</th>
             <th>Ngành</th>
             <th>Slug</th>
-            <th>Trạng Thái</th>
-            <th>Cập nhật</th>
+            {{-- <th>Trạng Thái</th> --}}
+            {{-- <th>Cập nhật</th> --}}
             <th> </th>
         </tr>
     </thead>
@@ -44,10 +44,11 @@
                 <td>{{ $family->classes->lop_vn }}</td>
                 <td>{{ $family->phylum->nganh_vn }}</td>
                 <td>{{ $family->slug }}</td>
-                <td family="{{ $family->status == 'active' ? 'btn btn-success' : 'btn-btn-danger' }} bg-color">{{ $family->status }}</td>
-                <td>{{ $family->created_at }}</td>
+                
+                {{-- <td family="{{ $family->status == 'active' ? 'btn btn-success' : 'btn-btn-danger' }} bg-color">{{ $family->status }}</td> --}}
+               
                 <td>
-                  <form id="deleteOrderForm" action="{{ route('admin.destroyFamily', $family->id) }}" method="POST">
+                  <form id="deleteFamilyForm"  method="POST">
                     <a class="btn btn-success" data-toggle="modal" data-target="#editFamilyModal" data-action="edit" data-id="{{ $family->id }}">
                         <i class="fa fa-edit"></i>
                     </a>

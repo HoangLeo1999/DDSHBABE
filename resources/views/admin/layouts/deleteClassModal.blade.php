@@ -30,7 +30,7 @@
 
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-        axios.delete('/destroy-class/' + phylumId, {
+        axios.delete('/admin/destroy-class/' + classId, {
             headers: {
                 'X-CSRF-TOKEN': csrfToken
             }
@@ -46,15 +46,16 @@
             }
 
             $('#deleteClassModal').modal('hide');
+            location.reload();
         })
         .catch(function (error) {
-            console.error('Error deleting phylum:', error);
+            console.error('Error deleting class:', error);
             alert('Đã xảy ra lỗi trong quá trình xóa lớp.');
             $('#deleteClassModal').modal('hide');
         });
     }
 
-    function removeClassFromUI(phylumId) {
+    function removeClassFromUI(classId) {
         // Thực hiện loại bỏ phần tử ngành khỏi UI
         $('#class-list').find('.class-item[data-id="' + classId + '"]').remove();
     }

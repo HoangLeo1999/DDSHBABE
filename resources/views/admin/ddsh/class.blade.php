@@ -40,10 +40,10 @@
                 <td>{{ $class->lop_latin }}</td>
                 <td>{{ $class->phylum->nganh_vn }}</td>
                 <td>{{ $class->slug }}</td>
-                <td class="{{ $class->status == 'active' ? 'btn btn-success' : 'btn-btn-danger' }} bg-color">{{ $class->status }}</td>
+                <td style="background-color: {{ $class->status == 'active' ? '#28a745' : '#dc3545' }}; color: #fff;" class="btn bg-color">{{ $class->status }}</td>
                 <td>{{ $class->created_at }}</td>
                 <td>
-                  <form id="deleteUserForm" action="{{ route('admin.destroyClass', $class->id) }}" method="POST">
+                  <form id="deleteClassForm" action="{{ route('admin.destroyClass', $class->id) }}" method="POST">
                     <a class="btn btn-success" data-toggle="modal" data-target="#editClassModal" data-action="edit" data-id="{{ $class->id }}">
                         <i class="fa fa-edit"></i>
                     </a>

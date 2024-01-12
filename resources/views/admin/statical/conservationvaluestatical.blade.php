@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('main-content')
-<div id="layoutSidenav_content">
+<div style="flex-grow:1" id="layoutSidenav_content">
         <main>
           @include('admin.layouts.header')
           <style>
@@ -30,7 +30,7 @@
   <!-- /.box-header -->
   <a href="{{route('admin.exportconservationvalue')}}" class="btn btn-success">Export to Excel</a>
   <div class="box-body table-responsive no-padding">
-    <small>Thực vật</small>
+    <small>Giá trị bảo tồn</small>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -40,34 +40,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($plants as $plant)
+            @foreach($conservationvls as $con)
                 <tr>
-                    <td>{{ $plant['STT'] }}</td>
-                    <td>{{ $plant['conservationvalue'] }}</td>
-                    <td>{{ $plant['species_count'] }}</td>
+                    <td>{{ $con['STT'] }}</td>
+                    <td class="{{ $con['colorClass'] }}">{{ $con['conservationvalue'] }}</td>
+                    <td>{{ $con['species_count'] }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <small>Động vật</small>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Lớp</th>
-                <th>Số lượng loài</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($animals as $animal)
-                <tr>
-                    <td>{{ $animal['STT'] }}</td>
-                    <td>{{ $animal['conservationvalue'] }}</td>
-                    <td>{{ $animal['species_count'] }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+
         </main>
         <footer class="footer-admin mt-auto footer-light">
             <div class="container-xl px-4">

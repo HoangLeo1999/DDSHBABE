@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\biodiversity;
 
 use App\Models\Phylum;
 use App\Http\Controllers\Controller;
@@ -73,12 +73,13 @@ class PhylumController extends Controller
     public function destroyPhylum($id)
     {
         try {
-            $phylums = Phylum::findOrFail($id);
-            $phylums->delete();
+            $phylum = Phylum::findOrFail($id);
+            $phylum->delete();
     
-            return response()->json(['success' => true, 'message' => 'Xóa tài khoản thành công']);
+            return response()->json(['success' => true, 'message' => 'Xóa phylum thành công']);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Xóa tài khoản thất bại. Lỗi: ' . $e->getMessage()]);
+            dd($e); // hoặc dump($e);
+            return response()->json(['success' => false, 'message' => 'Xóa phylum thất bại. Lỗi: ' . $e->getMessage()]);
         }
     }
 }

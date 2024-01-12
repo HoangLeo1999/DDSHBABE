@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('main-content')
-<div id="layoutSidenav_content">
+<div style="flex-grow:1" id="layoutSidenav_content">
         <main>
           @include('admin.layouts.header')
           <style>

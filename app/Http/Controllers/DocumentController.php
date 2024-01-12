@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,8 +10,8 @@ class DocumentController extends Controller
 {
     public function index()
     {
-        $documents = Document::paginate(5);
-        return view('admin.document', compact('documents'));
+        $documents = Document::paginate(10);
+        return view('document.text.document', compact('documents'));
         // Change the number based on your preference
     }
 
@@ -20,7 +20,7 @@ class DocumentController extends Controller
         $request->validate([
             'name' => 'required',
             'coquanbh' => 'required',
-            'document' => 'required|mimes:pdf,doc,docx,',
+            'document' => 'required|mimes:pdf,doc,docx,xlsx',
         ]);
 
         $documentName = $request->file('document')->getClientOriginalName();

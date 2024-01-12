@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('main-content')
-<div id="layoutSidenav_content">
+<div style="flex-grow:1" id="layoutSidenav_content">
         <main>
           @include('admin.layouts.header')
           <style>
@@ -30,7 +30,7 @@
   <!-- /.box-header -->
   <a href="{{route('admin.exporthabitat')}}" class="btn btn-success">Export to Excel</a>
   <div class="box-body table-responsive no-padding">
-    <small>Thực vật</small>
+    <small>Sinh cảnh</small>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -40,30 +40,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($plants as $plant)
+            @foreach($habitats as $habitat)
                 <tr>
-                    <td>{{ $plant['STT'] }}</td>
-                    <td>{{ $plant['habitat'] }}</td>
-                    <td>{{ $plant['species_count'] }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <small>Động vật</small>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Sinh cảnh sống</th>
-                <th>Số lượng loài</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($animals as $animal)
-                <tr>
-                    <td>{{ $animal['STT'] }}</td>
-                    <td>{{ $animal['habitat'] }}</td>
-                    <td>{{ $animal['species_count'] }}</td>
+                    <td>{{ $habitat['STT'] }}</td>
+                    <td>{{ $habitat['habitat'] }}</td>
+                    <td>{{ $habitat['species_count'] }}</td>
                 </tr>
             @endforeach
         </tbody>

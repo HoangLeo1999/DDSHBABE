@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Biểu Đồ Ngành Động Vật và Thực Vật</title>
 </head>
-<div id="layoutSidenav_content">
+<div style="flex-grow:1" id="layoutSidenav_content">
     <main>
       @include('admin.layouts.header')
 <body>

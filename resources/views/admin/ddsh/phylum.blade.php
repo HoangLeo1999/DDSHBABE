@@ -41,10 +41,10 @@
                 <td>{{ $phylum->nganh_vn }}</td>
                 <td>{{ $phylum->nganh_latin }}</td>
                 <td>{{ $phylum->slug }}</td>
-                <td class="{{ $phylum->status == 'active' ? 'btn btn-success' : 'btn-btn-danger' }} bg-color">{{ $phylum->status }}</td>
+                <td style="background-color: {{ $phylum->status == 'active' ? '#28a745' : '#dc3545' }}; color: #fff;" class="btn bg-color">{{ $phylum->status }}</td>
                 <td>{{ $phylum->created_at }}</td>
                 <td>
-                  <form id="deleteUserForm" action="{{ route('admin.destroyPhylum', $phylum->id) }}" method="POST">
+                  <form id="deletePhylumForm" action="{{ route('admin.destroyPhylum', $phylum->id) }}" method="POST">
                     <a class="btn btn-success" data-toggle="modal" data-target="#editPhylumModal" data-action="edit" data-id="{{ $phylum->id }}">
                         <i class="fa fa-edit"></i>
                     </a>

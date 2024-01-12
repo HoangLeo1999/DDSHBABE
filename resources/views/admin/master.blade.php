@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown no-caret d-none d-md-block me-3">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{route('about-us.index')}}" >
                         <div class="fw-500">Giới thiệu</div>
                     </a>
                 </li>
@@ -182,7 +182,7 @@
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="/profile">
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Account
                         </a>

@@ -21,17 +21,16 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
-    function confirmDeleteUser() {
-    var userId = $('#deleteUserModal').data('id');
-    var isConfirmed = confirm("Bạn có chắc chắn muốn xóa tài khoản này?");
+   function confirmDeleteUser(userId) {
+        var isConfirmed = confirm("Bạn có chắc chắn muốn xóa tài khoản này?");
 
-    if (!isConfirmed) {
-        return;
-    }
+        if (!isConfirmed) {
+            return;
+        }
 
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-    axios.delete('/destroy-account/' + userId, {
+    axios.delete('/admin/destroy-account/' + userId, {
         headers: {
             'X-CSRF-TOKEN': csrfToken
         }
@@ -47,6 +46,7 @@
         }
 
         $('#deleteUserModal').modal('hide');
+        localtion.reload();
     })
     .catch(function (error) {
         console.error('Error deleting role:', error);

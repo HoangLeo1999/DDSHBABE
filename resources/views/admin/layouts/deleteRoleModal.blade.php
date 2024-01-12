@@ -31,7 +31,7 @@
 
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-    axios.delete('/destroy-role/' + roleId, {
+    axios.delete('/admin/destroy-role/' + roleId, {
         headers: {
             'X-CSRF-TOKEN': csrfToken
         }

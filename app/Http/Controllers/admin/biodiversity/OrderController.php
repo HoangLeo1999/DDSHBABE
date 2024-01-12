@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\biodiversity;
 use App\Models\Order;
 use App\Models\Classes;
 use App\Models\Phylum;
@@ -53,12 +53,21 @@ class OrderController extends Controller
 
     public function getOrderById($id)
     {
-        $orders = Order::findOrFail($id);
-        $phylums = Phylum::all();
-        $classes = Classes::all();
-
-        return response()->json([$orders=>$orders,$classes=>$classes
-        ,$phylums=>$phylums]);
+       
+       
+        try {
+            $orders = Order::findOrFail($id);
+            $classes = Classes::all();
+            $phylums = Phylum::all();
+    
+            return response()->json([
+                'orders' => $orders,
+                'classes' => $classes,
+                'phylums' => $phylums
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Class not found.'], 404);
+        }
     }
 
     public function saveOrder(Request $request)

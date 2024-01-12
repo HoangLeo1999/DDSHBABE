@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\statistic;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CountOrderExport;
 use App\Http\Controllers\Controller;

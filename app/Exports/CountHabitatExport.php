@@ -10,15 +10,14 @@ class CountHabitatExport implements FromCollection
     protected $plants;
     protected $animals;
 
-    public function __construct(array $plants, array $animals)
+    public function __construct( array $habitats)
     {
-        $this->plants = $plants;
-        $this->animals = $animals;
+        $this->habitats = $habitats;
     }
 
     public function collection()
     {
-        return collect(array_merge($this->plants, $this->animals));
+        return collect(array_merge($this->habitats));
     }
 
     public function headings(): array

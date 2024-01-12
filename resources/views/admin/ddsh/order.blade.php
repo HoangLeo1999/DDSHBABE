@@ -28,7 +28,7 @@
             <th>Lớp</th>
             <th>Ngành</th>
             <th>Slug</th>
-            <th>Trạng Thái</th>
+            {{-- <th>Trạng Thái</th> --}}
             <th>Cập nhật</th>
             <th> </th>
         </tr>
@@ -42,7 +42,7 @@
                 <td>{{ $order->classes->lop_vn }}</td>
                 <td>{{ $order->phylum->nganh_vn }}</td>
                 <td>{{ $order->slug }}</td>
-                <td order="{{ $order->status == 'active' ? 'btn btn-success' : 'btn-btn-danger' }} bg-color">{{ $order->status }}</td>
+                {{-- <td order="{{ $order->status == 'active' ? 'btn btn-success' : 'btn-btn-danger' }} bg-color">{{ $order->status }}</td> --}}
                 <td>{{ $order->created_at }}</td>
                 <td>
                   <form id="deleteOrderForm" action="{{ route('admin.destroyOrder', $order->id) }}" method="POST">

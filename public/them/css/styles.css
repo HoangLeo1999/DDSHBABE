@@ -1878,6 +1878,45 @@ progress {
   .gy-xxl-4 {
     --bs-gutter-y: 1.5rem;
   }
+  .ex-text {
+    color: rgb(80, 9, 9);
+}
+
+.ew-text {
+    color: rgb(187, 29, 29);
+}
+
+.cr-text {
+    color: rgb(177, 75, 80);
+}
+.en-text {
+  color: rgb(230, 145, 19);
+}
+
+.vu-text {
+  color: rgb(220, 186, 13);
+}
+
+.cd-text {
+  color: rgb(144, 182, 4);
+}
+.lr-text {
+  color: rgb(9, 222, 158);
+}
+.nt-text {
+color: rgb(23, 177, 18);
+}
+
+.lc-text {
+color: rgb(70, 162, 84);
+}
+
+.ne-text {
+color: rgb(146, 147, 143);
+}
+.dd-text {
+  color: rgb(95, 124, 116);
+  }
   .g-xxl-5,
   .gx-xxl-5 {
     --bs-gutter-x: 2.5rem;

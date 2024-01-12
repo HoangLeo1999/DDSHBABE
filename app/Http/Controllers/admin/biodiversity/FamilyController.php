@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\biodiversity;
 use App\Models\Classes;
 use App\Models\Family;
 use App\Models\Order;
@@ -18,7 +18,7 @@ class FamilyController extends Controller
         $phylums = Phylum::all();
         return view('admin.ddsh.family', compact('classes', 'phylums','orders','families'));
     }
-    public function store(Request $request)
+    public function addFamily(Request $request)
     {
         // Validate the form data
         $validatedData = $request->validate([
@@ -42,13 +42,21 @@ class FamilyController extends Controller
 
     public function getFamilyById($id)
     {
-        $families = Family::findOrFail($id);
-        $phylums = Phylum::all();
-        $classes = Classes::all();
-        $orders = Order::all();
-
-        return response()->json([$orders=>$orders,$classes=>$classes
-        ,$phylums=>$phylums,$families=>$families]);
+         try {
+            $families = Family::findOrFail($id);
+            $orders = Order::all();
+            $classes = Classes::all();
+            $phylums = Phylum::all();
+    
+            return response()->json([
+                'families'=>$families,
+                'orders' => $orders,
+                'classes' => $classes,
+                'phylums' => $phylums
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Class not found.'], 404);
+        }
     }
 
     public function saveFamily(Request $request)

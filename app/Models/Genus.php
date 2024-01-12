@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class Genus extends Model
 {
     use HasFactory;
+    protected $table = 'genus';
     protected $fillable = [
         'chi_vn',
         'chi_latin',

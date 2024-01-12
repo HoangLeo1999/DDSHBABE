@@ -2,29 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
-use App\Http\Controllers\admin\PhylumController;
+use App\Http\Controllers\admin\biodiversity\PhylumController;
 use App\Http\Controllers\admin\HelplistController;
-use App\Http\Controllers\admin\OrderController;
+use App\Http\Controllers\admin\biodiversity\OrderController;
 use App\Http\Controllers\admin\ContactController;
-use App\Http\Controllers\admin\ClassesController;
-use App\Http\Controllers\admin\GenusController;
-use App\Http\Controllers\admin\FamilyController;
-use App\Http\Controllers\admin\DocumentController;
-use App\Http\Controllers\admin\SpeciesController;
+use App\Http\Controllers\admin\biodiversity\ClassesController;
+use App\Http\Controllers\admin\biodiversity\GenusController;
+use App\Http\Controllers\admin\biodiversity\FamilyController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\admin\biodiversity\SpeciesController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\AccountController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\admin\PhylumChartController;
-use App\Http\Controllers\admin\ClassstaticalController;
-use App\Http\Controllers\admin\OrderstaticalController;
-use App\Http\Controllers\admin\FamilystaticalController;
-use App\Http\Controllers\admin\GenusstaticalController;
-use App\Http\Controllers\admin\AnimalstaticalController;
-use App\Http\Controllers\admin\PlantstaticalController;
-use App\Http\Controllers\admin\HabitatstaticalController;
-use App\Http\Controllers\admin\ConservationvaluestaticalController;
+use App\Http\Controllers\admin\statistic\PhylumChartController;
+use App\Http\Controllers\admin\statistic\ClassstaticalController;
+use App\Http\Controllers\admin\statistic\OrderstaticalController;
+use App\Http\Controllers\admin\statistic\FamilystaticalController;
+use App\Http\Controllers\admin\statistic\GenusstaticalController;
+use App\Http\Controllers\admin\statistic\AnimalstaticalController;
+use App\Http\Controllers\admin\statistic\PlantstaticalController;
+use App\Http\Controllers\admin\statistic\HabitatstaticalController;
+use App\Http\Controllers\admin\statistic\ConservationvaluestaticalController;
 use App\Http\Controllers\HelpController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\AboutUsController;
 
 
@@ -63,12 +64,27 @@ use App\Http\Controllers\AboutUsController;
 //     Route::get('/doc', [DocumentController::class, 'index'])->name('admin.document');
 //     Route::get('/species', [SpeciesController::class, 'index'])->name('admin.species');
 // });
+
+
+
+    //tài liệu text
+Route::get('/doc', [DocumentController::class, 'index'])->name('admin.document');
+Route::post('/create-doc', [DocumentController::class, 'store'])->name('admin.addDocument');
+Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->name('admin.downloaddoc');
+//video
+Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
+Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
+Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
+Route::get('/videos/{video}', [VideoController::class, 'show'])->name('videos.show');
+Route::get('/videos/{video}/download', [VideoController::class, 'download'])->name('videos.download');
 Route::get('/help',[HelpController::class,'index'])->name('help');
+//admin
 Route::prefix('admin')->group(function () {
    
 
-    // Ddsh
+
     Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
+        //Cập nhật
     //phylum
     Route::get('/phylum', [PhylumController::class, 'index'])->name('admin.phylum');
     Route::post('/add-phylum', [PhylumController::class, 'store'])->name('admin.addPhylum');
@@ -80,7 +96,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/add-class', [ClassesController::class, 'store'])->name('admin.addClass');
     Route::get('/get-class/{id}', [ClassesController::class, 'getClassById'])->name('admin.getClassById');
     Route::put('/save-class', [ClassesController::class, 'saveClass'])->name('admin.saveClass');
-    Route::delete('/destroy-class/{id}', [PhylumController::class, 'destroyClass'])->name('admin.destroyClass');
+    Route::delete('/destroy-class/{id}', [ClassesController::class, 'destroyClass'])->name('admin.destroyClass');
     //order
     Route::get('/order', [OrderController::class, 'index'])->name('admin.order');
     Route::post('/add-order', [OrderController::class, 'store'])->name('admin.addOrder');
@@ -89,29 +105,26 @@ Route::prefix('admin')->group(function () {
     Route::delete('/destroy-order/{id}', [OrderController::class, 'destroyOrder'])->name('admin.destroyOrder');
     //family
     Route::get('/family', [FamilyController::class, 'index'])->name('admin.family');
-    Route::post('/add-family', [FamilyController::class,'store'])->name('admin.addFamily');
+    Route::post('/add-family', [FamilyController::class,'addFamily'])->name('admin.addFamily');
     Route::get('/get-family/{id}', [FamilyController::class, 'getFamilyById'])->name('admin.getFamilyById');
     Route::put('/save-family', [FamilyController::class, 'saveFamily'])->name('admin.saveFamily');
     Route::delete('/destroy-family/{id}', [FamilyController::class, 'destroyFamily'])->name('admin.destroyFamily');
     //genus
     Route::get('/genus', [GenusController::class, 'index'])->name('admin.genus');
-    Route::post('/add-family', [GenusController::class, 'store'])->name('admin.addGenus');
-    Route::get('/get-family/{id}', [GenusController::class, 'getGenusById'])->name('admin.getGenusById');
-    Route::put('/save-family', [GenusController::class, 'saveGenus'])->name('admin.saveGenus');
-    Route::delete('/destroy-family/{id}', [GenusController::class, 'destroyGenus'])->name('admin.destroyGenus');
+    Route::post('/add-genus', [GenusController::class, 'store'])->name('admin.addGenus');
+    Route::get('/get-genus/{id}', [GenusController::class, 'getGenusById'])->name('admin.getGenusById');
+    Route::put('/save-genus', [GenusController::class, 'saveGenus'])->name('admin.saveGenus');
+    Route::delete('/destroy-genus/{id}', [GenusController::class, 'destroyGenus'])->name('admin.destroyGenus');
     //species
     Route::get('/species', [SpeciesController::class, 'index'])->name('admin.species');
-    Route::post('/add-order', [OrderController::class, 'store'])->name('admin.addOrder');
-    Route::get('/get-order/{id}', [OrderController::class, 'getOrderById'])->name('admin.getOrderById');
-    Route::put('/save-order', [OrderController::class, 'saveOrder'])->name('admin.saveOrder');
-    Route::delete('/destroy-order/{id}', [OrderController::class, 'destroyOrder'])->name('admin.destroyOrder');
+    Route::post('/add-species', [SpeciesController::class, 'store'])->name('admin.addSpecies');
+    Route::get('/get-species/{id}', [SpeciesController::class, 'getSpeciesById'])->name('admin.getSpeciesById');
+    Route::put('/save-species', [SpeciesController::class, 'saveSpecies'])->name('admin.saveSpecies');
+    Route::delete('/destroy-species/{id}', [SpeciesController::class, 'destroySpecies'])->name('admin.destroySpecies');
     //Help and contact
     Route::get('/help', [HelplistController::class, 'index'])->name('admin.helplist');
     Route::get('/contact', [ContactController::class, 'index'])->name('admin.contactlist');
-    //tài liệu
-    Route::get('/doc', [DocumentController::class, 'index'])->name('admin.document');
-    Route::post('/create-doc', [DocumentController::class, 'store'])->name('admin.addDocument');
-    Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->name('admin.downloaddoc');
+
    
     //Thống kê
     //Ngành

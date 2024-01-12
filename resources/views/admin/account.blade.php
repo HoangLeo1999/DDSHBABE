@@ -7,7 +7,7 @@
         max-width: 600px;
     }
 </style>
-<div id="layoutSidenav_content">
+<div style="flex-grow:1" id="layoutSidenav_content">
     <main>
         @include('admin.layouts.header')
         <br>
@@ -122,7 +122,7 @@
                                 </a>
                                 @csrf 
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal" data-id="{{ $account->id }}">
+                                <button type="button" class="btn btn-danger" onclick="confirmDeleteUser({{ $account->id }})">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </form>
